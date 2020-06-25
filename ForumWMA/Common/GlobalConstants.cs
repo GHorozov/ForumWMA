@@ -1,6 +1,6 @@
 ﻿namespace ForumWMA.Common
 {
-    public static  class GlobalConstants
+    public static class GlobalConstants
     {
         public const string AdministratorRoleName = "Administrator";
     }
