@@ -19,6 +19,8 @@ using ForumWMA.Models;
 using System.Reflection;
 using ForumWMA.Data.Seeding;
 using ForumWMA.Common.Mapper;
+using ForumWMA.Services.Interfaces;
+using ForumWMA.Services;
 
 namespace ForumWMA
 {
@@ -76,8 +78,10 @@ namespace ForumWMA
 
             services.AddRazorPages();
             services.AddMvc();
-            
-            
+
+            services.AddTransient<IEmailSenderService>(x => new EmailSenderService(this.Configuration["SendGrid:ApiKey"]));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
