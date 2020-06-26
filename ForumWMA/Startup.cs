@@ -80,8 +80,10 @@ namespace ForumWMA
             services.AddMvc();
 
             services.AddTransient<IEmailSenderService>(x => new EmailSenderService(this.Configuration["SendGrid:ApiKey"]));
-
-
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IVoteService, VoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

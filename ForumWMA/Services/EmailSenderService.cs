@@ -1,14 +1,14 @@
-﻿using ForumWMA.Services.EmailInfrastructure;
-using ForumWMA.Services.Interfaces;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ForumWMA.Services
+﻿namespace ForumWMA.Services
 {
+    using ForumWMA.Services.EmailInfrastructure;
+    using ForumWMA.Services.Interfaces;
+    using SendGrid;
+    using SendGrid.Helpers.Mail;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class EmailSenderService : IEmailSenderService
     {
         private readonly SendGridClient client;
