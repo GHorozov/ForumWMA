@@ -8,5 +8,7 @@ namespace ForumWMA.Services.Interfaces
     public interface ICategoryService
     {
         IEnumerable<T> All<T>(int? count = null);
+
+        T GetByName<T>(string name, int? take = null, int skip = 0);
     }
 }

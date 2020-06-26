@@ -31,5 +31,16 @@
 
             return result;
         }
+
+        public T GetByName<T>(string name, int? take = null, int skip = 0)
+        {
+            var result = this.context
+                .Categories
+                .Where(x => !x.IsDeleted && x.Name == name)
+                .To<T>()
+                .FirstOrDefault();
+
+            return result;
+        }
     }
 }
