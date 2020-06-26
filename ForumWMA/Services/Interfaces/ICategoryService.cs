@@ -7,6 +7,6 @@ namespace ForumWMA.Services.Interfaces
 {
     public interface ICategoryService
     {
-        //IEnumerable<T> All<T>(int? count = null);
+        IEnumerable<T> All<T>(int? count = null);
     }
 }

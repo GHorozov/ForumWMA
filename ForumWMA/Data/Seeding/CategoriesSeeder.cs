@@ -23,7 +23,7 @@
                 switch (category)
                 {
                     case "Sport":
-                        imageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fmumbrella.com.au%2Fwhen-it-comes-to-sports-marketing-australia-isnt-competitive-enough-585992&psig=AOvVaw2g91pqacZZGtnoraGHP3-b&ust=1593264352603000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDc27HKn-oCFQAAAAAdAAAAABAD";
+                        imageUrl = "https://www.vmcdn.ca/f/files/halifaxtoday/images/sports/071818-sports-equipment-recreation-gym-fitness-adobestock_190038155.jpeg;w=960";
                         break;
                     case "Coronavirus":
                         imageUrl = "https://www.ub.edu/eurosla2020/wp-content/uploads/2020/03/CORONAVIRUS.jpg";

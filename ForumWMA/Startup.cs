@@ -124,6 +124,7 @@ namespace ForumWMA
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("ForumCategory", "f/{name}", new { controller = "Category", action = "GetByName" });
                 endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();

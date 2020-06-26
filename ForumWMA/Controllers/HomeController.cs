@@ -4,19 +4,26 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using ForumWMA.Models;
+    using ForumWMA.Models.ViewModels.Home;
+    using ForumWMA.Services.Interfaces;
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService)
         {
-            _logger = logger;
+            this.categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? count)
         {
-            return View();
+            var viewModel = new IndexViewModel()
+            {
+                Categories = this.categoryService.All<IndexCategoryViewModel>(count),
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()
