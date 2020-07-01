@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using ForumWMA.Services.Interfaces;
+using ForumWMA.Common;
 
 namespace ForumWMA.Areas.Identity.Pages.Account
 {
@@ -76,6 +77,8 @@ namespace ForumWMA.Areas.Identity.Pages.Account
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                var isAnyUsers = !this.userManager.Users.Any();
+
                 var user = new ForumWMAUser { UserName = Input.Email, Email = Input.Email };
                 var result = await userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -96,6 +99,16 @@ namespace ForumWMA.Areas.Identity.Pages.Account
                         Input.Email,
                         "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    if (isAnyUsers)
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
+                    }
+                    else
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                    }
+
 
                     if (userManager.Options.SignIn.RequireConfirmedAccount)
                     {

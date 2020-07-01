@@ -1,12 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@inject UserManager<ForumWMAUser> UserManager
+@inject SignInManager<ForumWMAUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ForumWMA</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true"/>
-    <link rel="stylesheet"  href="~/css/site.css" asp-append-version="true" />
-    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -20,6 +23,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                      
+                        @if(SignInManager.IsSignedIn(this.User) && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-link text-white bg-success" asp-area="Administrator" asp-controller="Home" asp-action="Index">Control Panel</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
