@@ -1,14 +1,11 @@
 ﻿namespace ForumWMA.Areas.Administrator.Controllers
 {
+    using ForumWMA.Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     [Area("Administrator")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministratorController : Controller
     {
     }

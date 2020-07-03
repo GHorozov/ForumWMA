@@ -21,6 +21,7 @@ using ForumWMA.Data.Seeding;
 using ForumWMA.Common.Mapper;
 using ForumWMA.Services.Interfaces;
 using ForumWMA.Services;
+using AutoMapper;
 
 namespace ForumWMA
 {
@@ -79,11 +80,15 @@ namespace ForumWMA
             services.AddRazorPages();
             services.AddMvc();
 
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            services.AddSingleton(AutoMapperConfig.MapperInstance);
+
             services.AddTransient<IEmailSenderService>(x => new EmailSenderService(this.Configuration["SendGrid:ApiKey"]));
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteService, VoteService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
