@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
+    using System.Xml.Linq;
 
     public class ForumWMAUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -14,6 +15,10 @@
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 

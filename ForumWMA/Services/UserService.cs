@@ -62,6 +62,19 @@
             return user;
         }
 
+        public async Task<bool> DeleteById(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await this.userManager.DeleteAsync(user);
+
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<IdentityResult> ChangePassword(string id, string password)
         {
             var user = await this.userManager.FindByIdAsync(id);

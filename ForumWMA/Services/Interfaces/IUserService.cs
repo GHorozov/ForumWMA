@@ -15,6 +15,8 @@
 
         Task<T> GetUserById<T>(string id);
 
+        Task<bool> DeleteById(string id);
+
         Task<IdentityResult> ChangePassword(string id, string password);
     }
 }

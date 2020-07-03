@@ -42,6 +42,26 @@
         }
 
         [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var userModel = await this.userService.GetUserById<DeleteUserViewModel>(id);
+            if (userModel == null)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            return View(userModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Destroy(string id)
+        {
+            await this.userService.DeleteById(id);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
             var userModel = await this.userService.GetUserById<AdminChangePasswordInputModel>(id);

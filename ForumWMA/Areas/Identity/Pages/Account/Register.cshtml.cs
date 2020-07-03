@@ -23,6 +23,7 @@ namespace ForumWMA.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ForumWMAUser> signInManager;
+        private readonly RoleManager<ForumWMARole> roleManager;
         private readonly UserManager<ForumWMAUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSenderService emailSenderService;
@@ -30,11 +31,13 @@ namespace ForumWMA.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<ForumWMAUser> userManager,
             SignInManager<ForumWMAUser> signInManager,
+            RoleManager<ForumWMARole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSenderService emailSenderService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.logger = logger;
             this.emailSenderService = emailSenderService;
         }
@@ -59,6 +62,16 @@ namespace ForumWMA.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
             //[DataType(DataType.Password)]
             //[Display(Name = "Confirm password")]
             //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -79,7 +92,7 @@ namespace ForumWMA.Areas.Identity.Pages.Account
             {
                 var isAnyUsers = !this.userManager.Users.Any();
 
-                var user = new ForumWMAUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ForumWMAUser { UserName = Input.Email, Email = Input.Email, FirstName= Input.FirstName, LastName= Input.LastName };
                 var result = await userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -106,6 +119,11 @@ namespace ForumWMA.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        if (!await this.roleManager.RoleExistsAsync(GlobalConstants.UserRoleName))
+                        {
+                            await roleManager.CreateAsync(new ForumWMARole(GlobalConstants.UserRoleName));
+                        }
+
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
                     }
 
