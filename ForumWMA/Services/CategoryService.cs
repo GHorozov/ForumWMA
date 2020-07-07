@@ -4,8 +4,10 @@
     using ForumWMA.Data;
     using ForumWMA.Data.Models;
     using ForumWMA.Services.Interfaces;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class CategoryService : ICategoryService
     {
@@ -41,6 +43,23 @@
                 .FirstOrDefault();
 
             return result;
+        }
+
+        public async Task<string> Create(string name, string title, string description, string imageUrl)
+        {
+            var category = new Category()
+            {
+                Name = name,
+                Title = title,
+                Description = description,
+                ImageUrl = imageUrl,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            await context.Categories.AddAsync(category);
+            await context.SaveChangesAsync();
+
+            return category.Id;
         }
     }
 }

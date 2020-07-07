@@ -9,7 +9,7 @@
 <br />
 
 <div>
-    <a class="btn bg-info" asp-area="Administrator" asp-controller="Categories" asp-action="Create">Create new</a>
+    <a class="btn bg-info" asp-area="Administrator" asp-controller="Category" asp-action="Create">Create new</a>
 </div>
 
 @if (!Model.Any())
@@ -34,7 +34,7 @@ else
                     <td>@count</td>
                     <td>@item.Name</td>
                     <td>
-                        <a class="btn bg-info" asp-area="Administrator" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn bg-info" asp-area="Administrator" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     </td>
                 </tr>
 

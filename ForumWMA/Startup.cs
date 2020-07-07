@@ -78,7 +78,7 @@ namespace ForumWMA
             });
 
             services.AddRazorPages();
-            services.AddMvc();
+            services.AddMvc(); 
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             services.AddSingleton(AutoMapperConfig.MapperInstance);

@@ -10,5 +10,7 @@ namespace ForumWMA.Services.Interfaces
         IEnumerable<T> All<T>(int? count = null);
 
         T GetByName<T>(string name, int? take = null, int skip = 0);
+
+        Task<string> Create(string name, string title, string description, string imageUrl);
     }
 }
