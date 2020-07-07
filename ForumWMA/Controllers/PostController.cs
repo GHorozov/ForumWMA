@@ -3,6 +3,7 @@ using ForumWMA.Models.InputModels.Post;
 using ForumWMA.Models.ViewModels.Category;
 using ForumWMA.Models.ViewModels.Post;
 using ForumWMA.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,6 +37,7 @@ namespace ForumWMA.Controllers
             return this.View(viewModel);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var categories = this.categoryService.All<CategoryDropDownViewModel>(null);
@@ -47,6 +49,7 @@ namespace ForumWMA.Controllers
             return this.View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(PostCreateInputModel inputModel)
         {
