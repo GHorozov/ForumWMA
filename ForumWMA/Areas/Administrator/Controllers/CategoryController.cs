@@ -5,10 +5,8 @@
     using ForumWMA.Areas.Administrator.Models.ViewModels.Category;
     using ForumWMA.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+  
 
     public class CategoryController : AdministratorController
     {
@@ -48,6 +46,32 @@
             {
                 return this.Redirect("/");
             }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var categoryModel = await this.categoryService.GetCategoryById<EditCategoryInputModel>(id);
+            //var category  = await this.categoryService.GetCategoryById(id);
+            if (categoryModel == null)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            return this.View(categoryModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, EditCategoryInputModel inputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            await this.categoryService.Edit(id, inputModel.Name, inputModel.Title, inputModel.Description, inputModel.ImageUrl);
 
             return RedirectToAction(nameof(All));
         }
