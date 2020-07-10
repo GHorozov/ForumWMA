@@ -32,5 +32,7 @@ namespace ForumWMA.Models.ViewModels.Post
         public DateTime CreatedOn { get; set; }
 
         public string UserUserName { get; set; }
+
+        public string UserProfilePictureUrl { get; set; }
     }
 }

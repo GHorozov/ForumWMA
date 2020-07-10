@@ -17,8 +17,9 @@
             <div class="comment-card ml-5 shadow-lg p-3 mb-5 bg-white rounded">
                 <div class="comment-item text-muted">
                     <p class="mb-2">
+                        <img src="@item.UserProfilePictureUrl" width="30" height="30" alt="profilePicture" class="rounded-circle mr-2">
                         <strong>
-                            <a href="https://mdbootstrap.com/profile/?id=72880" target="_blank">@item.UserUserName</a>
+                            <a href="#" target="_blank">@item.UserUserName</a>
                         </strong>
                         <time datetime="@item.CreatedOn.ToString("O")"></time>
                     </p>
@@ -43,7 +44,7 @@
     <!-- Card header -->
     <div class="card-header forum-card-img-30 d-flex justify-content-between">
         <p class="pt-2 mb-0">
-            <img src="" alt="profilePicture" class="rounded-circle mr-2">
+            <img src="@Model.UserProfilePictureUrl" width="50" height="50" alt="profilePicture" class="rounded-circle mr-2">
             <strong>@Model.UserUserName</strong>
             <time datetime="@Model.CreatedOn.ToString("O")"></time>
         </p>

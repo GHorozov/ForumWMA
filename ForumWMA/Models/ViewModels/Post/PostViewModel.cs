@@ -21,6 +21,8 @@
 
         public string UserUserName { get; set; }
 
+        public string UserProfilePictureUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public int VotesCount { get; set; }
