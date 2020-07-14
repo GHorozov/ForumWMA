@@ -30,6 +30,7 @@
         {
             var users = this.context
                 .Users
+                .Where(x => !x.IsDeleted)
                 .To<T>(this.mapper);
 
             return users;
@@ -67,8 +68,15 @@
             var user = await this.userManager.FindByIdAsync(id);
             if (user != null)
             {
-                await this.userManager.DeleteAsync(user);
-
+                // hard delete
+                //await this.userManager.DeleteAsync(user);
+                
+                // soft delete
+                user.IsDeleted = true;
+                
+                this.context.Users.Update(user);
+                await this.context.SaveChangesAsync();
+                
                 return true;
             }
 

@@ -4,14 +4,16 @@ using ForumWMA.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ForumWMA.Migrations
 {
     [DbContext(typeof(ForumWMADbContext))]
-    partial class ForumWMADbContextModelSnapshot : ModelSnapshot
+    [Migration("20200710134453_AddTagsToPostsManyToMany")]
+    partial class AddTagsToPostsManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

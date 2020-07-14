@@ -44,6 +44,8 @@
             var result = this.context
                 .Categories
                 .Where(x => !x.IsDeleted && x.Name == name)
+                .Include(x => x.Posts)
+                .ThenInclude(x => x.Tags)
                 .To<T>()
                 .FirstOrDefault();
 
@@ -66,15 +68,6 @@
 
             return category.Id;
         }
-
-        //public async Task<Category> GetCategoryById(string id)
-        //{
-        //    var category = await this.context
-        //        .Categories
-        //        .SingleOrDefaultAsync(x => x.Id == id);
-
-        //    return category;
-        //}
 
         public async Task<T> GetCategoryById<T>(string id)
         {

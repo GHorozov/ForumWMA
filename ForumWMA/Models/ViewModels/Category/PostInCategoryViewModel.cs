@@ -3,6 +3,7 @@
     using ForumWMA.Common.Mapper.Interfaces;
     using ForumWMA.Data.Models;
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Text.RegularExpressions;
 
@@ -28,5 +29,7 @@
         public int CommentsCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public IEnumerable<PostTagViewModel> Tags { get; set; }
     }
 }

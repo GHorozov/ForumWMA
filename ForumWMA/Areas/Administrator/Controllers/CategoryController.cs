@@ -54,7 +54,6 @@
         public async Task<IActionResult> Edit(string id)
         {
             var categoryModel = await this.categoryService.GetCategoryById<EditCategoryInputModel>(id);
-            //var category  = await this.categoryService.GetCategoryById(id);
             if (categoryModel == null)
             {
                 return this.RedirectToAction(nameof(All));

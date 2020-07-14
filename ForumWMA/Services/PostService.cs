@@ -28,7 +28,7 @@
             return result;
         }
 
-        public async Task<string> Create(string title, string content, string categoryId, string userId)
+        public async Task<string> Create(string title, string content, string categoryId, string userId, IEnumerable<string> multipleTagId)
         {
             var post = new Post()
             {
@@ -40,6 +40,25 @@
             };
 
             await this.context.Posts.AddAsync(post);
+            await this.context.SaveChangesAsync();
+
+            foreach (var tagId in multipleTagId)
+            {
+                var postTag = new PostTag()
+                {
+                    PostId = post.Id,
+                    //Post = post,
+                    TagId = tagId,
+                    //Tag = this.context.Tags.SingleOrDefault(x => x.Id == tagId)
+                };
+
+                await this.context.PostTag.AddAsync(postTag);
+                //await this.context.SaveChangesAsync();
+
+                post.Tags.Add(postTag);
+            }
+
+            this.context.Posts.Update(post);
             await this.context.SaveChangesAsync();
 
             return post.Id;

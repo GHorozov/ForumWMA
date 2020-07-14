@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TagViewModel>
+
+@{
+    ViewData["Title"] = "All Tags";
+    var count = 1;
+}
+
+<partial name="/Areas/Administrator/Views/Shared/Partials/_AdminNavBarPartial.cshtml" />
+<br />
+
+<div>
+    <a class="btn bg-info" asp-area="Administrator" asp-controller="Tag" asp-action="Create">Create new</a>
+</div>
+
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="text-light bg-warning">
+                <th>#</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a class="btn bg-info" asp-area="Administrator" asp-controller="Tag" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </td>
+                </tr>
+
+                count++;
+            }
+        </tbody>
+    </table>
+</div>

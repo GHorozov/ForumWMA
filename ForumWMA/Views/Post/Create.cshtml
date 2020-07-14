@@ -29,6 +29,12 @@
     </div>
 
     <div>
+        <label asp-for="@Model.MultipleTagId"></label>
+        <select asp-for="@Model.MultipleTagId" asp-items="@Model.Tags.Select(x => new SelectListItem(x.Name, x.Id))" multiple class="form-control"></select>
+        <span asp-validation-for="@Model.MultipleTagId" class="text-danger"></span>
+    </div>
+
+    <div>
         <label asp-for="@Model.CategoryId"></label>
         <select asp-for="@Model.CategoryId" asp-items="@Model.Categories.Select(x => new SelectListItem(x.Name, x.Id))" class="form-control"></select>
         <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
@@ -36,3 +42,7 @@
     <hr />
     <input type="submit" value="Create" class="btn btn-primary" />
 </form>
+
+
+
+

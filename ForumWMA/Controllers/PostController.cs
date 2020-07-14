@@ -2,6 +2,7 @@
 using ForumWMA.Models.InputModels.Post;
 using ForumWMA.Models.ViewModels.Category;
 using ForumWMA.Models.ViewModels.Post;
+using ForumWMA.Models.ViewModels.Tag;
 using ForumWMA.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,12 +19,14 @@ namespace ForumWMA.Controllers
         private readonly IPostService postService;
         private readonly ICategoryService categoryService;
         private readonly UserManager<ForumWMAUser> userManager;
+        private readonly ITagService tagService;
 
-        public PostController(IPostService postService, ICategoryService categoryService, UserManager<ForumWMAUser> userManager)
+        public PostController(IPostService postService, ICategoryService categoryService, UserManager<ForumWMAUser> userManager, ITagService tagService)
         {
             this.postService = postService;
             this.categoryService = categoryService;
             this.userManager = userManager;
+            this.tagService = tagService;
         }
 
         public IActionResult GetPostById(string id)
@@ -41,9 +44,11 @@ namespace ForumWMA.Controllers
         public IActionResult Create()
         {
             var categories = this.categoryService.All<CategoryDropDownViewModel>(null);
+            var tags = this.tagService.All<TagDropDownViewModel>(null);
             var viewModel = new PostCreateInputModel()
             {
                 Categories = categories,
+                Tags = tags
             };
 
             return this.View(viewModel);
@@ -59,7 +64,7 @@ namespace ForumWMA.Controllers
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var postId = await this.postService.Create(inputModel.Title, inputModel.Content, inputModel.CategoryId, user.Id);
+            var postId = await this.postService.Create(inputModel.Title, inputModel.Content, inputModel.CategoryId, user.Id, inputModel.MultipleTagId);
 
             return this.RedirectToAction(nameof(this.GetPostById), new { id = postId });
         }

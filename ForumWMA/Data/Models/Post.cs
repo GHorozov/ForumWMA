@@ -11,6 +11,7 @@
             this.Id = Guid.NewGuid().ToString();
             this.Comments = new HashSet<Comment>();
             this.Votes = new HashSet<Vote>();
+            this.Tags = new HashSet<PostTag>();
         }
         public string Title { get; set; }
 
@@ -28,5 +29,7 @@
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
+
+        public virtual ICollection<PostTag> Tags { get; set; }
     }
 }

@@ -19,6 +19,10 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<PostTag> PostTag { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -46,6 +50,24 @@
               .HasForeignKey(x => x.UserId)
               .IsRequired()
               .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+               .Entity<PostTag>()
+               .HasKey(x => new { x.PostId, x.TagId });
+
+            builder
+                .Entity<Post>()
+                .HasMany(x => x.Tags)
+                .WithOne(x => x.Post)
+                .HasForeignKey(x => x.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Tag>()
+                .HasMany(x => x.Posts)
+                .WithOne(x => x.Tag)
+                .HasForeignKey(x => x.TagId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

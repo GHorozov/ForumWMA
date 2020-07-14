@@ -13,6 +13,15 @@
 {
     <div class="media-body border mb-1 rounded">
         <h4 class="media-heading"><a asp-controller="Post" asp-action="GetPostById" asp-route-id="@post.Id">@post.Title</a></h4>
+        <p>
+            @foreach (var tag in post.Tags)
+            {
+                @if(tag.Tag != null)
+                {
+                    <a href="#">@tag.Tag.Name</a>
+                }
+            }
+        </p>
         <p>@post.ShortContent</p>
         <p class="">
             <ul class="list-inline list-unstyled text-right">

@@ -7,7 +7,7 @@
 
     public interface IPostService
     {
-        Task<string> Create(string title, string content, string categoryId, string userId);
+        Task<string> Create(string title, string content, string categoryId, string userId, IEnumerable<string> multipleTagId);
 
         T ById<T>(string id);
 

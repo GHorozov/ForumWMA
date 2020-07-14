@@ -89,9 +89,9 @@ namespace ForumWMA
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITagService, TagService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
