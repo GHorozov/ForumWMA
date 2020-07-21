@@ -16,14 +16,14 @@ namespace ForumWMA.Models.ViewModels.Post
 
         public string Content { get; set; }
 
-        public string CleanContent
-        {
-            get
-            {
-                var content = WebUtility.HtmlDecode(Regex.Replace(this.Content, @"<[^>]+>", string.Empty));
-                return content;
-            }
-        }
+        //public string CleanContent
+        //{
+        //    get
+        //    {
+        //        var content = WebUtility.HtmlDecode(Regex.Replace(this.Content, @"<[^>]+>", string.Empty));
+        //        return content;
+        //    }
+        //}
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 

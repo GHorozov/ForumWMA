@@ -47,14 +47,10 @@
                 var postTag = new PostTag()
                 {
                     PostId = post.Id,
-                    //Post = post,
                     TagId = tagId,
-                    //Tag = this.context.Tags.SingleOrDefault(x => x.Id == tagId)
                 };
 
                 await this.context.PostTag.AddAsync(postTag);
-                //await this.context.SaveChangesAsync();
-
                 post.Tags.Add(postTag);
             }
 
